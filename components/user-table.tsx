@@ -21,7 +21,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { columns } from "./columns"; 
+import { columns } from "./columns";
 import { fetchUsers } from "@/utils/fetchUser";
 import { Loader2 } from "lucide-react";
 
@@ -66,7 +66,7 @@ const TableComponent = () => {
                     value={globalFilter}
                     onChange={handleGlobalSearch}
                     placeholder="Search here"
-                    className="w-1/4"
+                    className="w-full sm:w-3/4 md:w-1/2 lg:w-1/4"
                 />
                 {table.getColumn("name")?.getCanFilter() && (
                     <NameFilter column={table.getColumn("name")} />
@@ -131,36 +131,7 @@ const TableComponent = () => {
             </Table>
 
             {/* Pagination Controls */}
-            <div className="flex items-center gap-2 mt-4">
-                <Button
-                    className="border rounded p-1"
-                    onClick={() => table.firstPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    {'<<'}
-                </Button>
-                <Button
-                    className="border rounded p-1"
-                    onClick={() => table.previousPage()}
-                    disabled={!table.getCanPreviousPage()}
-                >
-                    {'<'}
-                </Button>
-                <Button
-                    className="border rounded p-1"
-                    onClick={() => table.nextPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    {'>'}
-                </Button>
-                <Button
-                    className="border rounded p-1"
-                    onClick={() => table.lastPage()}
-                    disabled={!table.getCanNextPage()}
-                >
-                    {'>>'}
-                </Button>
-
+            <div className="flex justify-between mt-4">
                 <span className="flex items-center gap-1">
                     <div>Page</div>
                     <strong>
@@ -168,8 +139,39 @@ const TableComponent = () => {
                         {table.getPageCount().toLocaleString()}
                     </strong>
                 </span>
+                <div>
+                    <Button
+                        className="border rounded p-1"
+                        onClick={() => table.firstPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {'<<'}
+                    </Button>
+                    <Button
+                        className="border rounded p-1"
+                        onClick={() => table.previousPage()}
+                        disabled={!table.getCanPreviousPage()}
+                    >
+                        {'<'}
+                    </Button>
+                    <Button
+                        className="border rounded p-1"
+                        onClick={() => table.nextPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {'>'}
+                    </Button>
+                    <Button
+                        className="border rounded p-1"
+                        onClick={() => table.lastPage()}
+                        disabled={!table.getCanNextPage()}
+                    >
+                        {'>>'}
+                    </Button>
+                </div>
 
-                <span className="flex items-center gap-1">
+
+                {/* <span className="flex items-center gap-1">
                     | Go to page:
                     <Input
                         type="number"
@@ -182,9 +184,9 @@ const TableComponent = () => {
                         }}
                         className="border p-1 rounded w-16"
                     />
-                </span>
+                </span> */}
 
-                <select
+                {/* <select
                     value={table.getState().pagination.pageSize}
                     onChange={(e) => {
                         table.setPageSize(Number(e.target.value));
@@ -195,7 +197,7 @@ const TableComponent = () => {
                             Show {pageSize}
                         </option>
                     ))}
-                </select>
+                </select> */}
             </div>
         </div>
     );
@@ -209,7 +211,7 @@ function NameFilter({ column }: { column: any }) {
             value={columnFilterValue || ""}
             onChange={(e) => column.setFilterValue(e.target.value)}
             placeholder="Filter by name"
-            className="w-1/4"
+            className="w-full sm:w-3/4 md:w-1/2 lg:w-1/4"
         />
     );
 }
